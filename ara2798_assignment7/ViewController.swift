@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol {
     
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var stateTextField: UITextField!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var conditionsLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
+    
+    var dataSession = WeatherData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +33,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func checkConditionsButton(_ sender: UIButton) {
+        let selectedCity:String = cityTextField.text!
+        let selectedState:String = stateTextField.text!
+        self.dataSession.getData(city: selectedCity, state: selectedState)
+    }
+    
     //MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    //MARK: WeatherDataProtocol
+    func responseDataHandler(data: NSDictionary) {
+        print("HI")
+    }
+    
+    func responseError(message: String) {
+        print("BYE")
     }
 
 }
