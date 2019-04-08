@@ -37,20 +37,28 @@ class WeatherData {
             (data, response, error) -> Void in
             if error != nil {
                 //IMPLEMENT LABEL!!!
-                print(error!)
+                self.delegate?.responseError(message: error as! String)
             } else {
                 do {
                     let jsonResult = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
                     if jsonResult != nil {
-                        print(jsonResult!)
-                        /*let current_condition:[Dictionary]? = jsonResult!["current_condition"] as? [Dictionary]
-                        let weather:Array<Dictionary> = jsonResult!["weather"] as? Array<Dictionary>
-                        if current_condition != nil && weather != nil {
-                            self.delegate?.responseDataHandler(data: jsonResult!)
-                        }*/
+                        //print(jsonResult!)
+                        let data:NSDictionary? = jsonResult!["data"] as? NSDictionary
+                        let climateAverages = data!["ClimateAverages"] as? NSArray
+                        let current_condition = data!["current_condition"] as? NSArray
+                        let weather = data!["weather"] as? NSArray
+                        if climateAverages != nil && current_condition != nil && weather != nil {
+                            //print(climateAverages!)
+                            //print(current_condition!)
+                            //print(weather!)
+                            self.delegate?.responseDataHandler(data: data!)
+                        } else {
+                            self.delegate?.responseError(message:"Error caught in try statement")
+                        }
                     }
                 } catch {
                     // Handle the exception
+                    self.delegate?.responseError(message:"Error caught in catch statement")
                 }
             }
         }
