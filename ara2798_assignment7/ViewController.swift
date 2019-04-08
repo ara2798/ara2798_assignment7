@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
     
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var stateTextField: UITextField!
+    @IBOutlet weak var weatherImage: WeatherImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var conditionsLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
@@ -35,9 +36,32 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
     }
     
     @IBAction func checkConditionsButton(_ sender: UIButton) {
-        let selectedCity:String = cityTextField.text!
-        let selectedState:String = stateTextField.text!
-        self.dataSession.getData(city: selectedCity, state: selectedState)
+        var city:String? = cityTextField.text
+        city = city?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        var state:String? = stateTextField.text
+        state = state?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        guard let selectedCity = city, let selectedState = state, !selectedCity.isEmpty, !selectedState.isEmpty else {
+            return
+        }
+        city = ""
+        state = ""
+        for chr in selectedCity {
+            if chr != " " {
+                city = city! + String(chr)
+            } else {
+                city = city! + "+"
+            }
+        }
+        for chr in selectedState {
+            if chr != " " {
+                state = state! + String(chr)
+            } else {
+                state = state! + "+"
+            }
+        }
+        print(city!)
+        print(state!)
+        self.dataSession.getData(city: city!, state: state!)
     }
     
     //MARK: UITextFieldDelegate
@@ -52,7 +76,9 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
         let current_dict = current_condition![0] as? NSDictionary
         let weather = data["weather"] as? NSArray
         let weather_dict = weather![0] as? NSDictionary
-        print(weather_dict!)
+        
+        let icon = current_dict!["weatherIconUrl"] as? NSArray
+        let weatherIcon = icon![0] as? NSDictionary
         
         let cur_temp = (current_dict!["temp_C"] as! String) + "*C/" + (current_dict!["temp_F"] as! String) + "*F"
         let cur_cloudCover = "Cloud cover: " + (current_dict!["cloudcover"] as! String) + "%"
@@ -62,8 +88,10 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
         let cur_wind = (current_dict!["windspeedKmph"] as! String) + "kmph/" + (current_dict!["windspeedMiles"] as! String) + "mph " + (current_dict!["winddir16Point"] as! String) + " (" + (current_dict!["winddirDegree"] as! String) + "*)"
         
         DispatchQueue.main.async(){
+            self.weatherImage.downloaded(from: weatherIcon!["value"] as! String)
             self.temperatureLabel.text = cur_temp
             self.conditionsLabel.text = cur_cloudCover + "\n" + cur_humidity + "\n" + cur_pressure + "\n" + cur_precipitation + "\n" + cur_wind
+            self.weatherImage.isHidden = false
             self.temperatureLabel.isHidden = false
             self.conditionsLabel.isHidden = false
             self.errorLabel.isHidden = true
@@ -73,6 +101,7 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
     func responseError(message: String) {
         DispatchQueue.main.async() {
             self.errorLabel.text = "Current conditions not found"
+            self.weatherImage.isHidden = true
             self.temperatureLabel.isHidden = true
             self.conditionsLabel.isHidden = true
             self.errorLabel.isHidden = false

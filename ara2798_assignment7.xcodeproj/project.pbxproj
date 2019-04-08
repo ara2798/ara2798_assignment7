@@ -14,6 +14,7 @@
 		963953E72259759000EFF12C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 963953E62259759000EFF12C /* Assets.xcassets */; };
 		963953EA2259759000EFF12C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963953E82259759000EFF12C /* LaunchScreen.storyboard */; };
 		963953F22259851A00EFF12C /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963953F12259851A00EFF12C /* WeatherData.swift */; };
+		96EEF532225AE14C00B83E18 /* WeatherImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EEF531225AE14C00B83E18 /* WeatherImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		963953E92259759000EFF12C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		963953EB2259759000EFF12C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		963953F12259851A00EFF12C /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		96EEF531225AE14C00B83E18 /* WeatherImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				963953DC2259758F00EFF12C /* AppDelegate.swift */,
 				963953DE2259758F00EFF12C /* ViewController.swift */,
+				96EEF531225AE14C00B83E18 /* WeatherImageView.swift */,
 				963953E02259758F00EFF12C /* Main.storyboard */,
 				963953F12259851A00EFF12C /* WeatherData.swift */,
 				963953E62259759000EFF12C /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 				963953E52259758F00EFF12C /* ara2798_assignment7.xcdatamodeld in Sources */,
 				963953DF2259758F00EFF12C /* ViewController.swift in Sources */,
 				963953F22259851A00EFF12C /* WeatherData.swift in Sources */,
+				96EEF532225AE14C00B83E18 /* WeatherImageView.swift in Sources */,
 				963953DD2259758F00EFF12C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

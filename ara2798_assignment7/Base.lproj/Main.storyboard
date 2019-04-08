@@ -33,7 +33,7 @@
                                     <action selector="checkConditionsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cXK-mC-DkP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdt-Ft-Bx1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdt-Ft-Bx1" customClass="WeatherImageView" customModule="ara2798_assignment7" customModuleProvider="target">
                                 <rect key="frame" x="36" y="225" width="85" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="3CL-iH-YuQ"/>
@@ -128,6 +128,7 @@
                         <outlet property="errorLabel" destination="yQS-7L-ofx" id="1ii-Aa-YGO"/>
                         <outlet property="stateTextField" destination="YUy-E3-TfG" id="HPG-98-7p8"/>
                         <outlet property="temperatureLabel" destination="Uun-Z0-n14" id="na1-mG-3VZ"/>
+                        <outlet property="weatherImage" destination="qdt-Ft-Bx1" id="KAY-ud-sfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
