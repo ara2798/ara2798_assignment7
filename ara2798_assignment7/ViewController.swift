@@ -74,8 +74,8 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
     func responseDataHandler(data: NSDictionary) {
         let current_condition = data["current_condition"] as? NSArray
         let current_dict = current_condition![0] as? NSDictionary
-        let weather = data["weather"] as? NSArray
-        let weather_dict = weather![0] as? NSDictionary
+        //let weather = data["weather"] as? NSArray
+        //let weather_dict = weather![0] as? NSDictionary
         
         let icon = current_dict!["weatherIconUrl"] as? NSArray
         let weatherIcon = icon![0] as? NSDictionary
