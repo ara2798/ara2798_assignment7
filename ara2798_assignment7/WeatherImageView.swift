@@ -20,6 +20,7 @@ class WeatherImageView: UIImageView {
 
 }
 
+/*
 extension UIImageView {
     func downloaded(from url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
@@ -38,5 +39,35 @@ extension UIImageView {
     func downloaded(from link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
+    }
+}*/
+
+extension UIImageView {
+    func downloaded(from url: URL) {
+        let urlSession = URLSession.shared
+        let url:URL = url
+        
+        let dataTask = urlSession.dataTask(with: url) {
+            (data, response, error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                guard
+                    let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode),
+                    let mime = response.mimeType, mime.hasPrefix("image"),
+                    let data = data,
+                    let image = UIImage(data: data)
+                    else {return}
+                DispatchQueue.main.async() {
+                    self.image = image
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func downloaded(from link: String) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url)
     }
 }

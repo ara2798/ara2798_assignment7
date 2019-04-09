@@ -80,12 +80,12 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherDataProtocol
         let icon = current_dict!["weatherIconUrl"] as? NSArray
         let weatherIcon = icon![0] as? NSDictionary
         
-        let cur_temp = (current_dict!["temp_C"] as! String) + "*C/" + (current_dict!["temp_F"] as! String) + "*F"
+        let cur_temp = (current_dict!["temp_C"] as! String) + "°C/" + (current_dict!["temp_F"] as! String) + "°F"
         let cur_cloudCover = "Cloud cover: " + (current_dict!["cloudcover"] as! String) + "%"
         let cur_humidity = "Humidity: " + (current_dict!["humidity"] as! String) + "%"
         let cur_pressure = "Pressure: " + (current_dict!["pressure"] as! String) + "mbar"
         let cur_precipitation = "Precipitation: " + (current_dict!["precipMM"] as! String) + "mm"
-        let cur_wind = (current_dict!["windspeedKmph"] as! String) + "kmph/" + (current_dict!["windspeedMiles"] as! String) + "mph " + (current_dict!["winddir16Point"] as! String) + " (" + (current_dict!["winddirDegree"] as! String) + "*)"
+        let cur_wind = (current_dict!["windspeedKmph"] as! String) + "kmph/" + (current_dict!["windspeedMiles"] as! String) + "mph " + (current_dict!["winddir16Point"] as! String) + " (" + (current_dict!["winddirDegree"] as! String) + "°)"
         
         DispatchQueue.main.async(){
             self.weatherImage.downloaded(from: weatherIcon!["value"] as! String)
